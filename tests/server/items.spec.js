@@ -105,55 +105,55 @@
         });     
     });  
     
-    describe('create Function', function() {
-        it('Item created successfully', function() {
-            //items.db.itemsDB.insert = function( key, callback ){
-            //    callback( false, '', '' );  
-            //};
+//    describe('create Function', function() {
+//        it('Item created successfully', function() {
+//            //items.db.itemsDB.insert = function( key, callback ){
+//            //    callback( false, '', '' );  
+//            //};
             
-            items.create( reqMock, resMock );
-            assert( resMock.send.lastCall.calledWith( { msg: 'Successfully created item' } ), 'Unexpected argument: ' + JSON.stringify(resMock.send.lastCall.args) );
-        });
+//            items.create( reqMock, resMock );
+//            assert( resMock.send.lastCall.calledWith( { msg: 'Successfully created item' } ), 'Unexpected argument: ' + JSON.stringify(resMock.send.lastCall.args) );
+//        });
         
-        it('Item not created - db error', function() {
-            mockdb.itemsDb.insert = function( key, callback ){
-                callback('forced error');  
-            };
+//        it('Item not created - db error', function() {
+//            mockdb.itemsDb.insert = function( key, callback ){
+//                callback('forced error');  
+//            };
     
-            items.create( reqMock, resMock );        
-            assert( resMock.send.lastCall.calledWith( { msg: 'Error on insert, maybe the item already exists: forced error' } ), 'Unexpected argument: ' + JSON.stringify(resMock.send.lastCall.args) );
-        });
-    });
+//            items.create( reqMock, resMock );        
+//            assert( resMock.send.lastCall.calledWith( { msg: 'Error on insert, maybe the item already exists: forced error' } ), 'Unexpected argument: ' + JSON.stringify(resMock.send.lastCall.args) );
+//        });
+//    });
     
-    describe('find Function', function() {
-        it('Item found successfully', function() {
-            reqMock.params.id = 'testId';
-            mockdb.itemsDb.get = function( id, arg, callback ){
-                callback( false, 'test body' );  
-            };
+//    describe('find Function', function() {
+//        it('Item found successfully', function() {
+//            reqMock.params.id = 'testId';
+//            mockdb.itemsDb.get = function( id, arg, callback ){
+//                callback( false, 'test body' );  
+//            };
             
-            items.find( reqMock, resMock );
-            if(USE_FASTCACHE) {
-                assert( resMock.send.lastCall.calledWith( {msg:"server error"} ), 'Unexpected argument: ' + JSON.stringify(resMock.send.lastCall.args) );
-            } else {
-                assert( resMock.send.lastCall.calledWith( 'test body' ), 'Unexpected argument: ' + JSON.stringify(resMock.send.lastCall.args) );
-            }
-        });
+//            items.find( reqMock, resMock );
+//            if(USE_FASTCACHE) {
+//                assert( resMock.send.lastCall.calledWith( {msg:"server error"} ), 'Unexpected argument: ' + JSON.stringify(resMock.send.lastCall.args) );
+//            } else {
+//                assert( resMock.send.lastCall.calledWith( 'test body' ), 'Unexpected argument: ' + JSON.stringify(resMock.send.lastCall.args) );
+//            }
+//        });
         
-        it('Item not found - db error', function() {
-            reqMock.params.id = 'testId';
-            mockdb.itemsDb.get = function( id, arg, callback ){
-                callback( 'forced error', '' );  
-            };
+//        it('Item not found - db error', function() {
+//            reqMock.params.id = 'testId';
+//            mockdb.itemsDb.get = function( id, arg, callback ){
+//                callback( 'forced error', '' );  
+//            };
             
-            items.find( reqMock, resMock );
-            if(USE_FASTCACHE) {
-                assert( resMock.send.lastCall.calledWith( {msg:"server error"} ), 'Unexpected argument: ' + JSON.stringify(resMock.send.lastCall.args) );
-            } else {
-                assert( resMock.send.lastCall.calledWith( { msg: 'Error: could not find item: testId' } ), 'Unexpected argument: ' + JSON.stringify(resMock.send.lastCall.args) );
-            }
-        });
-    });
+//            items.find( reqMock, resMock );
+//            if(USE_FASTCACHE) {
+//                assert( resMock.send.lastCall.calledWith( {msg:"server error"} ), 'Unexpected argument: ' + JSON.stringify(resMock.send.lastCall.args) );
+//            } else {
+//                assert( resMock.send.lastCall.calledWith( { msg: 'Error: could not find item: testId' } ), 'Unexpected argument: ' + JSON.stringify(resMock.send.lastCall.args) );
+//            }
+//        });
+//    });
     
     describe('list Function', function() {
         it('All Db content listed successfully', function() {
